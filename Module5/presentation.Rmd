@@ -1,6 +1,6 @@
 ---
 title: "Interactive Data Explorer - Shiny Application"
-author: "Phuoc NguyenNguyen"
+author: "Phuoc Nguyen"
 date: "`r Sys.Date()`"
 output: 
   ioslides_presentation:
