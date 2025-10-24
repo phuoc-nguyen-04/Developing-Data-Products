@@ -1,0 +1,142 @@
+---
+title: "Interactive Data Visualization with Plotly"
+author: "Phuoc Nguyen"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  ioslides_presentation: default
+  beamer_presentation:
+    theme: default
+    colortheme: default
+    fonttheme: default
+---
+
+## Welcome to Interactive Data Visualization
+
+This presentation demonstrates the power of Plotly for creating interactive visualizations.
+
+---
+
+## What is Plotly?
+
+- **Interactive plotting library** for R
+- Creates **web-based visualizations**
+- Supports **hover effects** and **zoom**
+- Perfect for **data exploration**
+
+---
+
+## Sample Dataset
+
+Let's explore the **mtcars** dataset:
+
+```{r setup, include=FALSE}
+library(plotly)
+library(dplyr)
+```
+
+```{r echo=FALSE}
+# Display first few rows
+head(mtcars)
+```
+
+---
+
+## Interactive Scatter Plot
+
+```{r}
+# Create interactive scatter plot
+p <- plot_ly(data = mtcars, 
+             x = ~wt, 
+             y = ~mpg, 
+             color = ~cyl,
+             size = ~hp,
+             text = ~paste("Car: ", rownames(mtcars), 
+                          "<br>Weight: ", wt, 
+                          "<br>MPG: ", mpg,
+                          "<br>Cylinders: ", cyl,
+                          "<br>Horsepower: ", hp),
+             hoverinfo = "text") %>%
+  add_markers() %>%
+  layout(title = "Car Performance Analysis",
+         xaxis = list(title = "Weight (1000 lbs)"),
+         yaxis = list(title = "Miles per Gallon"))
+
+p
+```
+
+---
+
+## Key Insights
+
+- **Lighter cars** tend to have **better fuel efficiency**
+- **More cylinders** generally mean **higher weight**
+- **Horsepower** varies significantly across car types
+
+---
+
+## Interactive Bar Chart
+
+```{r}
+# Create interactive bar chart
+avg_mpg <- mtcars %>%
+  group_by(cyl) %>%
+  summarise(avg_mpg = mean(mpg), .groups = 'drop')
+
+p2 <- plot_ly(data = avg_mpg,
+              x = ~cyl,
+              y = ~avg_mpg,
+              type = "bar",
+              text = ~paste("Cylinders: ", cyl, "<br>Avg MPG: ", round(avg_mpg, 2)),
+              hoverinfo = "text") %>%
+  layout(title = "Average MPG by Number of Cylinders",
+         xaxis = list(title = "Number of Cylinders"),
+         yaxis = list(title = "Average Miles per Gallon"))
+
+p2
+```
+
+---
+
+## 3D Visualization
+
+```{r}
+# Create 3D scatter plot
+p3 <- plot_ly(data = mtcars,
+               x = ~wt,
+               y = ~mpg,
+               z = ~hp,
+               color = ~cyl,
+               text = ~paste("Car: ", rownames(mtcars)),
+               hoverinfo = "text") %>%
+  add_markers() %>%
+  layout(scene = list(xaxis = list(title = "Weight"),
+                      yaxis = list(title = "MPG"),
+                      zaxis = list(title = "Horsepower")))
+
+p3
+```
+
+---
+
+## Benefits of Interactive Visualization
+
+- **Zoom and pan** for detailed exploration
+- **Hover effects** for instant data access
+- **Multiple views** of the same data
+- **Professional presentation** quality
+
+---
+
+## Thank You!
+
+**Interactive visualizations** make data more engaging and accessible.
+
+**Plotly** provides the tools to create stunning, interactive charts.
+
+---
+
+## Contact Information
+
+- **Author:** Phuoc Nguyen
+- **Date:** `r format(Sys.Date(), '%Y-%m-%d')`
+- **Technology:** R Markdown + Plotly

@@ -1,0 +1,22 @@
+---
+title: "Interactive Leaflet Map"
+author: "Phuoc Nguyen"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: html_document
+---
+
+## My Interactive Map
+
+```{r}
+library(leaflet)
+
+m <- leaflet() %>%
+  addTiles() %>%
+  setView(lng = 106.7699,
+          lat = 10.8478,
+          zoom = 12) %>%
+  addMarkers(lng = 106.7699,
+             lat = 10.8478,
+             popup = "Thủ Đức, TP.HCM")
+m
+```
